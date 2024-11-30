@@ -13,6 +13,7 @@ struct Skill {
 	int damage;//skill's damage
 	int maxTry;//skill's maximum number of attempt
 	int balTry;//skill's balance number of attempts
+
 	
 	
 	// Default constructor
@@ -32,6 +33,7 @@ class Pokemon {
 		int maxHP;
 		int currHP;
 		Skill skills[4];
+		string latestSkill = "-";
 		
 		//default constructor
 		Pokemon() : name(""), type(""), maxHP(0), currHP(0) {}
@@ -62,6 +64,9 @@ int main() {
 	SkillInitializer(palkiaSkills, charmanderSkills, eeveeSkills, dratiniSkills, pikachuSkills);
 	
 	int Player1, Player2;
+	// turn = 1 -> Pokemon1 Attack
+	// turn = 2 -> Pokemon2 Attack
+	int turn = 1;//
 	
 	
 	//Pokemon choosing
@@ -80,6 +85,8 @@ int main() {
 	
 	cout<<"Poke 1: "<<Poke1.name<<endl;
 	cout<<"Poke 2: "<<Poke2.name<<endl;
+	
+	
 	
 	
 	return 0;
