@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 using namespace std;
 
 struct Skill {
@@ -32,6 +33,9 @@ class Pokemon {
 		int currHP;
 		Skill skills[4];
 		
+		//default constructor
+		Pokemon() : name(""), type(""), maxHP(0), currHP(0) {}
+		
 		Pokemon(string pokeName, string pokeType, int pokemaxHP, Skill pokeskill[4])
 		: name(pokeName), type(pokeType), maxHP(pokemaxHP), currHP(pokemaxHP) {
 		for (int i = 0; i < 4; i++)
@@ -45,6 +49,8 @@ void SkillInitializer(Skill palkiaSkills[], Skill charmanderSkills[], Skill eeve
 
 int DamageEffect( string attackType, string defenderPoke);
 
+Pokemon pokemondetector(int playerchoice, Skill palkiaSkills[], Skill charmanderSkills[], Skill eeveeSkills[], Skill dratiniSkills[], Skill pikachuSkills[]);
+
 int main() {
 
 	Skill pikachuSkills[4];
@@ -55,13 +61,25 @@ int main() {
 	
 	SkillInitializer(palkiaSkills, charmanderSkills, eeveeSkills, dratiniSkills, pikachuSkills);
 	
-	Pokemon Pikachu("Pikachu", "Electric", 35, pikachuSkills);
-	Pokemon Dratini("Dratini", "Water", 41, dratiniSkills);
-	Pokemon Eeevee("Eevee", "Normal", 55, eeveeSkills);
-	Pokemon Charmander("Charmander", "Fire", 39, charmanderSkills);
-	Pokemon Palkia("Palkia", "Water", 90, palkiaSkills);
+	int Player1, Player2;
 	
-
+	
+	//Pokemon choosing
+	cout<<"Choose a Pokemon(0~4): ";
+	cin>>Player1;
+	cout<<"Choose a Pokemon(0~4): ";
+	cin>>Player2;
+	
+	if (Player1 == Player2)
+	{
+		cout<<"You have to choose Pokemons different from each other."<<endl;
+		exit(0);
+	}
+	Pokemon Poke1 = pokemondetector(Player1, palkiaSkills, charmanderSkills, eeveeSkills, dratiniSkills, pikachuSkills);
+	Pokemon Poke2 = pokemondetector(Player2, palkiaSkills, charmanderSkills, eeveeSkills, dratiniSkills, pikachuSkills);
+	
+	cout<<"Poke 1: "<<Poke1.name<<endl;
+	cout<<"Poke 2: "<<Poke2.name<<endl;
 	
 	
 	return 0;
@@ -111,12 +129,12 @@ int DamageEffect( string attackType, string defenderPoke)
 	//ROW = Attack Skill Type
 	// Column = Defender Pokemon Type
 	//			N , Gr, E , W , Gs , F
-	const int dmgEffect = {{0 , 0 , 0 , 0 , 0  , 0},//Normal
+	static const int dmgEffect[6][6] = {{0 , 0 , 0 , 0 , 0  , 0},//Normal
 			       {0 , 0 , 1 , 0 ,-1  , 1},//Ground
 			       {0 ,-1 ,-1 , 1 ,-1  , 0},//Electric
 			       {0 , 1 , 0 ,-1 ,-1  , 1},//Water
 			       {0 ,-1 , 0 , 1 ,-1  ,-1},//Grass
-			       {0 , 0 , 0 ,-1 , 1  ,-1}}//Fire 
+			       {0 , 0 , 0 ,-1 , 1  ,-1}};//Fire 
 			       
 	int attackval, defenderval, effect;
 	//map skill type to dmgEffect's row number
@@ -173,4 +191,27 @@ int DamageEffect( string attackType, string defenderPoke)
 	
 	return dmgEffect[attackval][defenderval];
 	
+}
 
+Pokemon pokemondetector(int playerchoice, Skill palkiaSkills[], Skill charmanderSkills[], Skill eeveeSkills[], Skill dratiniSkills[], Skill pikachuSkills[])
+{
+	switch(playerchoice) {
+		//Player = Pikachu
+		case 0:{
+			return Pokemon("Pikachu", "Electric", 35, pikachuSkills);}
+		//Player = Dratini
+		case 1:{
+			return Pokemon("Dratini", "Water", 41, dratiniSkills);}
+		//Player == Eevee
+		case 2:{
+			return Pokemon("Eevee", "Normal", 55, eeveeSkills);}
+		//Player == Charmander
+		case 3:{
+			return Pokemon("Charmander", "Fire", 39, charmanderSkills);}
+		//Player == Palkia
+		case 4:{
+			return Pokemon("Palkia", "Water", 90, palkiaSkills);}
+		}
+}
+		
+	
