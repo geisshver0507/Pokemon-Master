@@ -45,6 +45,10 @@ class Pokemon {
 			skills[i] = pokeskill[i];
 		}
 		}
+		
+		void HealthUpdater(int damage){
+			currHP -= damage;
+		}
 };
 
 void SkillInitializer(Skill palkiaSkills[], Skill charmanderSkills[], Skill eeveeSkills[], Skill dratiniSkills[], Skill pikachuSkills[]);
