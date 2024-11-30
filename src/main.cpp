@@ -30,6 +30,15 @@ class Pokemon {
 		string type;
 		int maxHP;
 		int currHP;
+		Skill skills[4];
+		
+		Pokemon(string pokeName, string pokeType, int pokemaxHP, Skill pokeskill[4])
+		: name(pokeName), type(pokeType), maxHP(pokemaxHP), currHP(pokemaxHP) {
+		for (int i = 0; i < 4; i++)
+		{
+			skills[i] = pokeskill[i];
+		}
+		}
 };
 
 void SkillInitializer(Skill palkiaSkills[], Skill charmanderSkills[], Skill eeveeSkills[], Skill dratiniSkills[], Skill pikachuSkills[]);
@@ -44,6 +53,17 @@ int main() {
 	
 	SkillInitializer(palkiaSkills, charmanderSkills, eeveeSkills, dratiniSkills, pikachuSkills);
 	
+	Pokemon Pikachu("Pikachu", "Electric", 35, pikachuSkills);
+	
+	cout<<"Class Test Pikachu"<<endl;
+	cout<<Pikachu.name<<endl;
+	cout<<Pikachu.type<<endl;
+	cout<<Pikachu.maxHP<<endl;
+	cout<<"Skill 0 : "<<Pikachu.skills[0].name<<endl;
+	cout<<"Skill 1 : "<<Pikachu.skills[1].name<<endl;
+	cout<<"Skill 2 : "<<Pikachu.skills[2].name<<endl;
+	cout<<"Skill 3 : "<<Pikachu.skills[3].name<<endl;
+	
 	cout<<"Pikachu Skill 0 balance try : "<<pikachuSkills[0].balTry<<endl;
 	cout<<"Eeevee Skill 0 balance try: "<<eeveeSkills[0].balTry<<endl;
 	
@@ -51,6 +71,8 @@ int main() {
 	
 	cout<<"Pikachu Skill 0 balance try: "<<pikachuSkills[0].balTry<<endl;
 	cout<<"Eeevee Skill 0 balance try: "<<eeveeSkills[0].balTry<<endl;
+	
+	
 	
 	return 0;
 }
