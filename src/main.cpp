@@ -43,6 +43,8 @@ class Pokemon {
 
 void SkillInitializer(Skill palkiaSkills[], Skill charmanderSkills[], Skill eeveeSkills[], Skill dratiniSkills[], Skill pikachuSkills[]);
 
+int DamageEffect( string attackType, string defenderPoke);
+
 int main() {
 
 	Skill pikachuSkills[4];
@@ -54,24 +56,12 @@ int main() {
 	SkillInitializer(palkiaSkills, charmanderSkills, eeveeSkills, dratiniSkills, pikachuSkills);
 	
 	Pokemon Pikachu("Pikachu", "Electric", 35, pikachuSkills);
+	Pokemon Dratini("Dratini", "Water", 41, dratiniSkills);
+	Pokemon Eeevee("Eevee", "Normal", 55, eeveeSkills);
+	Pokemon Charmander("Charmander", "Fire", 39, charmanderSkills);
+	Pokemon Palkia("Palkia", "Water", 90, palkiaSkills);
 	
-	cout<<"Class Test Pikachu"<<endl;
-	cout<<Pikachu.name<<endl;
-	cout<<Pikachu.type<<endl;
-	cout<<Pikachu.maxHP<<endl;
-	cout<<"Skill 0 : "<<Pikachu.skills[0].name<<endl;
-	cout<<"Skill 1 : "<<Pikachu.skills[1].name<<endl;
-	cout<<"Skill 2 : "<<Pikachu.skills[2].name<<endl;
-	cout<<"Skill 3 : "<<Pikachu.skills[3].name<<endl;
-	
-	cout<<"Pikachu Skill 0 balance try : "<<pikachuSkills[0].balTry<<endl;
-	cout<<"Eeevee Skill 0 balance try: "<<eeveeSkills[0].balTry<<endl;
-	
-	pikachuSkills[0].balTry = 0;
-	
-	cout<<"Pikachu Skill 0 balance try: "<<pikachuSkills[0].balTry<<endl;
-	cout<<"Eeevee Skill 0 balance try: "<<eeveeSkills[0].balTry<<endl;
-	
+
 	
 	
 	return 0;
@@ -115,5 +105,72 @@ void SkillInitializer(Skill palkiaSkills[], Skill charmanderSkills[], Skill eeve
 }
 	
 	
-
+int DamageEffect( string attackType, string defenderPoke)
+{
+	//0 = effective, 1 = super effective, -1 = not very effective
+	//ROW = Attack Skill Type
+	// Column = Defender Pokemon Type
+	//			N , Gr, E , W , Gs , F
+	const int dmgEffect = {{0 , 0 , 0 , 0 , 0  , 0},//Normal
+			       {0 , 0 , 1 , 0 ,-1  , 1},//Ground
+			       {0 ,-1 ,-1 , 1 ,-1  , 0},//Electric
+			       {0 , 1 , 0 ,-1 ,-1  , 1},//Water
+			       {0 ,-1 , 0 , 1 ,-1  ,-1},//Grass
+			       {0 , 0 , 0 ,-1 , 1  ,-1}}//Fire 
+			       
+	int attackval, defenderval, effect;
+	//map skill type to dmgEffect's row number
+	if (attackType == "Normal")
+	{
+		attackval = 0;
+	}
+	else if (attackType == "Ground")
+	{
+		attackval = 1;
+	}
+	else if (attackType == "Electric")
+	{
+		attackval = 2;
+	}
+	else if (attackType == "Water")
+	{
+		attackval = 3;
+	}
+	else if (attackType == "Grass")
+	{
+		attackval = 4;
+	}
+	else if (attackType == "Fire")
+	{
+		attackval = 5;
+	}
+	
+	//map defender pokemon type to dmgEffect's column number
+	if (defenderPoke == "Normal")
+	{
+		defenderval = 0;
+	}
+	else if (defenderPoke == "Ground")
+	{
+		defenderval = 1;
+	}
+	else if (defenderPoke == "Electric")
+	{
+		defenderval = 2;
+	}
+	else if (defenderPoke == "Water")
+	{
+		defenderval = 3;
+	}
+	else if (defenderPoke == "Grass")
+	{
+		defenderval = 4;
+	}
+	else if (defenderPoke == "Fire")
+	{
+		defenderval = 5;
+	}
+	
+	return dmgEffect[attackval][defenderval];
+	
 
