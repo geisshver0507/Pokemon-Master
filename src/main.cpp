@@ -17,6 +17,7 @@ struct Skill {
 	// balTry is set to the maximum number of attempt when initializing a skill
 	Skill(string skillName, string skillType, int skillDamage, int skillmaxTry):
 	name(skillName), type(skillType), damage(skillDamage), maxTry(skillmaxTry), balTry(skillmaxTry){}
+	
 };
 
 class Pokemon {
@@ -25,9 +26,15 @@ class Pokemon {
 		string type;
 		int maxHP;
 		int currHP;
-}
+};
 
 int main() {
 
-	
+	Skill thun("Thunderbolt","Electric",10,5);
+	cout<<"Skill :"<< thun.name<<endl;
+	cout<<"Type :"<< thun.type<<endl;
+	cout<<"Damage : "<< thun.damage<<endl;
+	cout<<"Max try: "<<thun.maxTry<<endl;
+	cout<<"balance try: "<<thun.balTry<<endl;
+	return 0;
 }
