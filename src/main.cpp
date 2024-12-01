@@ -56,7 +56,10 @@ class Pokemon {
 				latestSkill = skills[skillIndex].name;
 			}
 		}
-		
+		int getbalTry(int skillIndex)
+		{
+			return skills[skillIndex].balTry;
+		}
 };
 
 void SkillInitializer(Skill palkiaSkills[], Skill charmanderSkills[], Skill eeveeSkills[], Skill dratiniSkills[], Skill pikachuSkills[]);
