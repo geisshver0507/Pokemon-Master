@@ -68,6 +68,8 @@ int DamageEffect( string attackType, string defenderPoke);
 
 Pokemon pokemondetector(int playerchoice, Skill palkiaSkills[], Skill charmanderSkills[], Skill eeveeSkills[], Skill dratiniSkills[], Skill pikachuSkills[]);
 
+string effectMessage(int effect);
+
 int main() {
 
 	Skill pikachuSkills[4];
@@ -235,5 +237,15 @@ Pokemon pokemondetector(int playerchoice, Skill palkiaSkills[], Skill charmander
 			return Pokemon("Palkia", "Water", 90, palkiaSkills);}
 		}
 }
-		
+string effectMessage(int effect)
+{
+	switch (effect){
+		case -1:
+			return "It was not very effective.";
+		case 0:
+			return "It was effective.";
+		case 1:
+			return "It was super effective.";
+		}
+}
 	
