@@ -69,7 +69,7 @@ int DamageEffect( string attackType, string defenderPoke);
 Pokemon pokemondetector(int playerchoice, Skill palkiaSkills[], Skill charmanderSkills[], Skill eeveeSkills[], Skill dratiniSkills[], Skill pikachuSkills[]);
 
 string effectMessage(int effect);
-
+void battle(Pokemon& attacker, Pokemon& defender, int skillIndex);
 int main() {
 
 	Skill pikachuSkills[4];
@@ -103,7 +103,7 @@ int main() {
 	cout<<"Poke 1: "<<Poke1.name<<endl;
 	cout<<"Poke 2: "<<Poke2.name<<endl;
 	
-	
+	cout << effectMessage(0)<<endl;
 	
 	
 	return 0;
@@ -235,7 +235,10 @@ Pokemon pokemondetector(int playerchoice, Skill palkiaSkills[], Skill charmander
 		//Player == Palkia
 		case 4:{
 			return Pokemon("Palkia", "Water", 90, palkiaSkills);}
+		default:{
+			return Pokemon();}
 		}
+		
 }
 string effectMessage(int effect)
 {
@@ -246,6 +249,26 @@ string effectMessage(int effect)
 			return "It was effective.";
 		case 1:
 			return "It was super effective.";
+		default:
+			return "It was effective.";
 		}
+}
+
+void battle(Pokemon& attacker, Pokemon& defender, int skillIndex)
+{
+	int damage = attacker.skills[skillIndex].damage;
+	int damage_power = DamageEffect(attacker.skills[skillIndex].type, defender.type);
+	
+	if (damage_power == -1 )//attack not effective
+	{
+		damage-=3;
+	}
+	else if(damage_power == 1)//attack very effective
+	{
+		damage+=5;
+	}
+	attacker.SkillCount(skillIndex);
+	defender.HealthUpdater(damage);
+	cout<<attacker.name << "used"<< attacker.skills[skillIndex].name << " on " << defender.name << " for " <<damage<<endl;
 }
 	
