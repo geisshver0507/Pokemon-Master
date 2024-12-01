@@ -100,17 +100,79 @@ int main() {
 	}
 	Pokemon Poke1 = pokemondetector(Player1, palkiaSkills, charmanderSkills, eeveeSkills, dratiniSkills, pikachuSkills);
 	Pokemon Poke2 = pokemondetector(Player2, palkiaSkills, charmanderSkills, eeveeSkills, dratiniSkills, pikachuSkills);
-	
-	cout<<"Poke 1: "<<Poke1.name<<endl;
-	cout<<"Poke 2: "<<Poke2.name<<endl;
-	
-	
-	cout << effectMessage(0)<<endl;
-	
-	cout<<"Choose a skill (0~3):";
-	cin>>skillno;
-	
-	battle(Poke1, Poke2, skillno);
+	//print initial battle page
+	//
+	while(Poke1.currHP > 0 and Poke2.currHP > 0)
+	{	
+		cout<<"Choose a skill (0~3): ";
+		cin>>skillno;
+		
+		if (turn == 1)//poke1 attack and poke2 defends
+		{
+			Poke1.name
+			if (Poke1.getbalTry(skillno) > 0)
+			{
+			
+				battle(Poke1, Poke2, skillno);
+				if (Poke1.currHP > 0 and Poke2.currHP > 0)
+				{
+				
+					//print battle page
+				}
+				else
+				{
+					break;
+				}
+			}
+			else
+			{
+				cout << Poke1.name << " failed to perform " << Poke1.skills[skillno].name<<"."<<endl;
+			}
+		}
+		else if(turn == 2)//poke2 attack and poke1 defends
+		{
+			if (Poke2.getbalTry(skillno) > 0)
+			{
+				battle(Poke2, Poke1, skillno);
+				if (Poke1.currHP > 0 and Poke2.currHP > 0)
+				{
+				
+					//print battle page
+				}
+				else
+				{
+					break;
+				}
+			}
+			}
+			else
+			{
+				cout << Poke2.name << " failed to perform " << Poke2.skills[skillno].name<<"."<< endl;
+			}
+		}
+		
+		//changing turns of poke
+		if (turn == 1)
+		{
+			turn = 2;
+			
+		}
+		else if (turn == 2)
+		{
+			turn = 1;
+		}
+		
+		}
+		cout<<""<<endl;
+		cout<<"==============================================================="<<endl;
+		if (turn == 1)
+		{
+			cout<<"Match Result: "<< Poke1.name << " defeats " << Poke2.name<<endl;
+		}
+		else
+		{
+			cout<<"Match Result: "<< Poke2.name << " defeats " << Poke1.name<<endl;
+		}
 	
 	
 	return 0;
@@ -276,9 +338,8 @@ void battle(Pokemon& attacker, Pokemon& defender, int skillIndex)
 	}
 	attacker.SkillCount(skillIndex);
 	defender.HealthUpdater(damage);
-	cout<<attacker.name << "used"<< attacker.skills[skillIndex].name << " on " << defender.name << " for " <<damage<<endl;
-	cout<<"Balance skill count "<<attacker.getbalTry(skillIndex)<<endl;
-	cout<<"Defender Health "<<defender.currHP<<endl;
-	cout<<"Attacker recent attack: "<< attacker.latestSkill<<endl;
+	cout<<attacker.name<< " used " << attacker.skills[skillIndex].name;
+	cout<<effectMessage(damage_power)<<endl;
+	
 }
 	
