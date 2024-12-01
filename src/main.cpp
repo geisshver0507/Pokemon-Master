@@ -34,6 +34,7 @@ class Pokemon {
 		int currHP;
 		Skill skills[4];
 		string latestSkill = "-";
+		string effectText = "";
 		
 		//default constructor
 		Pokemon() : name(""), type(""), maxHP(0), currHP(0) {}
@@ -339,7 +340,8 @@ void battle(Pokemon& attacker, Pokemon& defender, int skillIndex)
 	attacker.SkillCount(skillIndex);
 	defender.HealthUpdater(damage);
 	cout<<attacker.name<< " used " << attacker.skills[skillIndex].name;
-	cout<<effectMessage(damage_power)<<endl;
+	attacker.effectText = effectMessage(damage_power);
+	cout<<attacker.effectText<<endl;
 	
 }
 	
