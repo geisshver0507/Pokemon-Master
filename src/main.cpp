@@ -48,7 +48,13 @@ class Pokemon {
 		}
 		
 		void HealthUpdater(int damage){
-			currHP -= damage;
+			if (currHP > 0):{
+				currHP -= damage;}
+			if (currHP < 0 ):
+			{
+				currHP = 0;
+			}
+			
 		}
 		void SkillCount (int skillIndex){
 			if (skills[skillIndex].balTry > 0)
@@ -71,8 +77,11 @@ Pokemon pokemondetector(int playerchoice, Skill palkiaSkills[], Skill charmander
 
 string effectMessage(int effect);
 void battle(Pokemon& attacker, Pokemon& defender, int skillIndex);
+
+//battle page printing functions
 void x_separator();
 void header();
+void DisplayPoke(const Pokemon& Poke1, const Pokemon& Poke2, int turn);
 
 int main() {
 
@@ -113,7 +122,7 @@ int main() {
 		
 		if (turn == 1)//poke1 attack and poke2 defends
 		{
-			Poke1.name
+			turn = 2;
 			if (Poke1.getbalTry(skillno) > 0)
 			{
 			
@@ -135,6 +144,7 @@ int main() {
 		}
 		else if(turn == 2)//poke2 attack and poke1 defends
 		{
+			turn = 1;
 			if (Poke2.getbalTry(skillno) > 0)
 			{
 				battle(Poke2, Poke1, skillno);
@@ -155,18 +165,8 @@ int main() {
 			}
 		}
 		
-		//changing turns of poke
-		if (turn == 1)
-		{
-			turn = 2;
-			
-		}
-		else if (turn == 2)
-		{
-			turn = 1;
-		}
 		
-		}
+		
 		cout<<""<<endl;
 		cout<<"==============================================================="<<endl;
 		if (turn == 1)
@@ -358,7 +358,42 @@ void x_separator()
 void header()
 {
 	x_separator();
-	cout << "| 2024-02 Object-Oriented Programming Pokemon Master          |<<endl;
+	cout << "| 2024-02 Object-Oriented Programming Pokemon Master          |" << endl;
 	x_separator();
 }
+void DisplayPoke(const Pokemon& Poke1, const Pokemon& Poke2, int turn)
+{
+	//printing Pokemon name
+	if (turn == 1)
+	{
+		cout << "| " << Poke1.name << " (*)";
+		cout << string(25-Poke1.name.size(), " ") << "| ";
+		cout << Poke2.name << string(29-Poke1.name.size(), " ") << "|"<<endl;
+	}
+	else
+	{
+		cout << "| " << Poke1.name;
+		cout << string(29-Poke1.name.size(), " ") << "| ";
+		cout << Poke2.name << string(25-Poke1.name.size(), " ") << "|"<<endl;
+	}
+	
+	//printing Pokemon Type
+	
+	cout << "| Type: " << Poke1.type << string(23 - Poke1.type.size(), " ");
+	cout << "| Type: " << Poke1.type << string(23 - Poke2.type.size(), " ") << "|" << endl;
+	
+	//printing Pokemon's current HP
+	
+	cout << "| HP: " << Poke1.currHP << string(25 - to_string(Poke1.currHP).size(), " ");
+	cout << "| HP: " << Poke2.currHP << string(25 - to_string(Poke2.currHP).size(), " ") << "|" << endl;
+	
+	x_separator();
+}
+
+	
+	
+	
+		
+	
+	
 	
