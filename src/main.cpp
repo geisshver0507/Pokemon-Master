@@ -48,9 +48,9 @@ class Pokemon {
 		}
 		
 		void HealthUpdater(int damage){
-			if (currHP > 0):{
+			if (currHP > 0){
 				currHP -= damage;}
-			if (currHP < 0 ):
+			if (currHP < 0 )
 			{
 				currHP = 0;
 			}
@@ -117,6 +117,7 @@ int main() {
 	Pokemon Poke1 = pokemondetector(Player1, palkiaSkills, charmanderSkills, eeveeSkills, dratiniSkills, pikachuSkills);
 	Pokemon Poke2 = pokemondetector(Player2, palkiaSkills, charmanderSkills, eeveeSkills, dratiniSkills, pikachuSkills);
 	//print initial battle page
+	displayBattlePage(Poke1, Poke2, turn);
 	//
 	while(Poke1.currHP > 0 and Poke2.currHP > 0)
 	{	
@@ -128,12 +129,15 @@ int main() {
 			turn = 2;
 			if (Poke1.getbalTry(skillno) > 0)
 			{
+				
 			
 				battle(Poke1, Poke2, skillno);
 				if (Poke1.currHP > 0 and Poke2.currHP > 0)
 				{
 				
 					//print battle page
+					displayBattlePage(Poke1, Poke2, turn);
+
 				}
 				else
 				{
@@ -142,7 +146,10 @@ int main() {
 			}
 			else
 			{
+				
 				cout << Poke1.name << " failed to perform " << Poke1.skills[skillno].name<<"."<<endl;
+				cout<<""<<endl;
+				displayBattlePage(Poke1, Poke2, turn);
 			}
 		}
 		else if(turn == 2)//poke2 attack and poke1 defends
@@ -155,30 +162,33 @@ int main() {
 				{
 				
 					//print battle page
+					displayBattlePage(Poke1, Poke2, turn);
 				}
 				else
 				{
 					break;
 				}
 			}
-			}
+			
 			else
 			{
 				cout << Poke2.name << " failed to perform " << Poke2.skills[skillno].name<<"."<< endl;
+				cout<<""<<endl;
+				displayBattlePage(Poke1, Poke2, turn);
 			}
 		}
 		
+		}
 		
 		
-		cout<<""<<endl;
 		cout<<"==============================================================="<<endl;
 		if (turn == 1)
 		{
-			cout<<"Match Result: "<< Poke1.name << " defeats " << Poke2.name<<endl;
+			cout<<"Match Result: "<< Poke2.name << " defeats " << Poke1.name<<endl;
 		}
 		else
 		{
-			cout<<"Match Result: "<< Poke2.name << " defeats " << Poke1.name<<endl;
+			cout<<"Match Result: "<< Poke1.name << " defeats " << Poke2.name<<endl;
 		}
 	
 	
@@ -345,22 +355,27 @@ void battle(Pokemon& attacker, Pokemon& defender, int skillIndex)
 	}
 	attacker.SkillCount(skillIndex);
 	defender.HealthUpdater(damage);
-	cout<<attacker.name<< " used " << attacker.skills[skillIndex].name;
+	cout<<attacker.name<< " used " << attacker.skills[skillIndex].name << "." << endl;
 	attacker.effectText = effectMessage(damage_power);
 	cout<<attacker.effectText<<endl;
+	cout<<""<<endl;
 	
 }
 void x_separator()
 {
 	cout<<"+";
-	cout<< string(61, "-");
-	cout<<"+"<< endl;
+	cout<< string(30, '-');
+	cout<<"+";
+	cout<< string(30, '-');
+	cout<<"+"<<endl;
 }
 
 //length of row line is 63 characters
 void header()
 {
-	x_separator();
+	cout<<"+";
+	cout<<string(61, '-');
+	cout<<"+"<<endl;
 	cout << "| 2024-02 Object-Oriented Programming Pokemon Master          |" << endl;
 	x_separator();
 }
@@ -370,25 +385,25 @@ void DisplayPoke(const Pokemon& Poke1, const Pokemon& Poke2, int turn)
 	if (turn == 1)
 	{
 		cout << "| " << Poke1.name << " (*)";
-		cout << string(25-Poke1.name.size(), " ") << "| ";
-		cout << Poke2.name << string(29-Poke1.name.size(), " ") << "|"<<endl;
+		cout << string(25-Poke1.name.size(), ' ') << "| ";
+		cout << Poke2.name << string(29-Poke2.name.size(), ' ') << "|"<<endl;
 	}
 	else
 	{
 		cout << "| " << Poke1.name;
-		cout << string(29-Poke1.name.size(), " ") << "| ";
-		cout << Poke2.name << string(25-Poke1.name.size(), " ") << "|"<<endl;
+		cout << string(29-Poke1.name.size(), ' ') << "| ";
+		cout << Poke2.name << " (*)"<< string(25-Poke2.name.size(), ' ') << "|"<<endl;
 	}
 	
 	//printing Pokemon Type
 	
-	cout << "| Type: " << Poke1.type << string(23 - Poke1.type.size(), " ");
-	cout << "| Type: " << Poke1.type << string(23 - Poke2.type.size(), " ") << "|" << endl;
+	cout << "| Type: " << Poke1.type << string(23 - Poke1.type.size(), ' ');
+	cout << "| Type: " << Poke2.type << string(23 - Poke2.type.size(), ' ') << "|" << endl;
 	
 	//printing Pokemon's current HP
 	
-	cout << "| HP: " << Poke1.currHP << string(25 - to_string(Poke1.currHP).size(), " ");
-	cout << "| HP: " << Poke2.currHP << string(25 - to_string(Poke2.currHP).size(), " ") << "|" << endl;
+	cout << "| HP: " << Poke1.currHP << string(25 - to_string(Poke1.currHP).size(), ' ');
+	cout << "| HP: " << Poke2.currHP << string(25 - to_string(Poke2.currHP).size(), ' ') << "|" << endl;
 	
 	x_separator();
 }
@@ -396,12 +411,12 @@ void DisplayPoke(const Pokemon& Poke1, const Pokemon& Poke2, int turn)
 void recentSkill( const Pokemon& Poke1, const Pokemon& Poke2 )
 {
 	//printing latest skills
-	cout << "| Latest Skill: " << Poke1.latestSkill << string(15 - Poke1.latestSkill.size(), " ");
-	cout << "| Latest Skill: " << Poke2.latestSkill << string(15 - Poke2.latestSkill.size(), " ") << "|" << endl;
+	cout << "| Latest Skill: " << Poke1.latestSkill << string(15 - Poke1.latestSkill.size(), ' ');
+	cout << "| Latest Skill: " << Poke2.latestSkill << string(15 - Poke2.latestSkill.size(), ' ') << "|" << endl;
 	
 	//printing damage effect
-	cout << "! " << Poke1.effectText << string(29 - Poke1.effectText, " ");
-	cout << "! " << Poke2.effectText << string(29 - Poke2.effectText, " ") << "|" << endl;
+	cout << "| " << Poke1.effectText << string(29 - Poke1.effectText.size(), ' ');
+	cout << "| " << Poke2.effectText << string(29 - Poke2.effectText.size(), ' ') << "|" << endl;
 	
 	x_separator();
 }
@@ -412,7 +427,7 @@ void skillInfo (const Pokemon& Poke1, const Pokemon& Poke2)
 		cout << "| (" << i << ") " << Poke1.skills[i].name
              	<< string(25 - Poke1.skills[i].name.size(), ' ') << "| (" << i << ") "
              	<< Poke2.skills[i].name
-             	<< string(25 - Poke2.skills[i].name.size() - to_string(i).size(), ' ') << "|" << endl;
+             	<< string(26 - Poke2.skills[i].name.size() - to_string(i).size(), ' ') << "|" << endl;
 
         	cout << "|     - Type: " << Poke1.skills[i].type
              	<< string(17 - Poke1.skills[i].type.size(), ' ') << "|     - Type: " << Poke2.skills[i].type
@@ -423,9 +438,9 @@ void skillInfo (const Pokemon& Poke1, const Pokemon& Poke2)
              	<< string(15 - to_string(Poke2.skills[i].damage).size(), ' ') << "|" << endl;
 
         	cout << "|     - Count: " << Poke1.skills[i].balTry << "(" << Poke1.skills[i].maxTry << ")"
-             	<< string(12, ' ')
+             	<< string(14 - to_string(Poke1.skills[i].balTry).size() - to_string(Poke1.skills[i].maxTry).size(), ' ')
              	<< "|     - Count: " << Poke2.skills[i].balTry << "(" << Poke2.skills[i].maxTry << ")"
-             	<< string(12, ' ')
+             	<< string(14 - to_string(Poke2.skills[i].balTry).size() - to_string(Poke2.skills[i].maxTry).size(), ' ')
              	<< "|" << endl;
     }
     x_separator();
@@ -434,9 +449,9 @@ void skillInfo (const Pokemon& Poke1, const Pokemon& Poke2)
 void displayBattlePage(const Pokemon& Poke1, const Pokemon& Poke2, int turn)
 {
 	header();
-	DisplayPoke(const Pokemon& Poke1, const Pokemon& Poke2, int turn);
-	recentSkill(const Pokemon& Poke1, const Pokemon& Poke2);
-	skillInfo (const Pokemon& Poke1, const Pokemon& Poke2);
+    	DisplayPoke(Poke1, Poke2, turn); 
+    	recentSkill(Poke1, Poke2);       
+    	skillInfo(Poke1, Poke2); 
 }
 
 		
