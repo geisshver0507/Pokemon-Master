@@ -430,6 +430,14 @@ void skillInfo (const Pokemon& Poke1, const Pokemon& Poke2)
     }
     x_separator();
 
+}
+void displayBattlePage(const Pokemon& Poke1, const Pokemon& Poke2, int turn)
+{
+	header();
+	DisplayPoke(const Pokemon& Poke1, const Pokemon& Poke2, int turn);
+	recentSkill(const Pokemon& Poke1, const Pokemon& Poke2);
+	skillInfo (const Pokemon& Poke1, const Pokemon& Poke2);
+}
 
 		
 	
