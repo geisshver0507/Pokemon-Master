@@ -49,6 +49,14 @@ class Pokemon {
 		void HealthUpdater(int damage){
 			currHP -= damage;
 		}
+		void SkillCount (int skillIndex){
+			if (skills[skillIndex].balTry > 0)
+			{
+				skills[skillIndex].balTry--;
+				latestSkill = skills[skillIndex].name;
+			}
+		}
+		
 };
 
 void SkillInitializer(Skill palkiaSkills[], Skill charmanderSkills[], Skill eeveeSkills[], Skill dratiniSkills[], Skill pikachuSkills[]);
