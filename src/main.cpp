@@ -71,6 +71,9 @@ Pokemon pokemondetector(int playerchoice, Skill palkiaSkills[], Skill charmander
 
 string effectMessage(int effect);
 void battle(Pokemon& attacker, Pokemon& defender, int skillIndex);
+void x_separator();
+void header();
+
 int main() {
 
 	Skill pikachuSkills[4];
@@ -343,5 +346,19 @@ void battle(Pokemon& attacker, Pokemon& defender, int skillIndex)
 	attacker.effectText = effectMessage(damage_power);
 	cout<<attacker.effectText<<endl;
 	
+}
+void x_separator()
+{
+	cout<<"+";
+	cout<< string(61, "-");
+	cout<<"+"<< endl;
+}
+
+//length of row line is 63 characters
+void header()
+{
+	x_separator();
+	cout << "| 2024-02 Object-Oriented Programming Pokemon Master          |<<endl;
+	x_separator();
 }
 	
