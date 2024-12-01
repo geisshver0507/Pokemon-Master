@@ -84,6 +84,7 @@ int main() {
 	// turn = 1 -> Pokemon1 Attack
 	// turn = 2 -> Pokemon2 Attack
 	int turn = 1;//
+	int skillno;
 	
 	
 	//Pokemon choosing
@@ -103,7 +104,13 @@ int main() {
 	cout<<"Poke 1: "<<Poke1.name<<endl;
 	cout<<"Poke 2: "<<Poke2.name<<endl;
 	
+	
 	cout << effectMessage(0)<<endl;
+	
+	cout<<"Choose a skill (0~3):";
+	cin>>skillno;
+	
+	battle(Poke1, Poke2, skillno);
 	
 	
 	return 0;
@@ -270,5 +277,8 @@ void battle(Pokemon& attacker, Pokemon& defender, int skillIndex)
 	attacker.SkillCount(skillIndex);
 	defender.HealthUpdater(damage);
 	cout<<attacker.name << "used"<< attacker.skills[skillIndex].name << " on " << defender.name << " for " <<damage<<endl;
+	cout<<"Balance skill count "<<attacker.getbalTry(skillIndex)<<endl;
+	cout<<"Defender Health "<<defender.currHP<<endl;
+	cout<<"Attacker recent attack: "<< attacker.latestSkill<<endl;
 }
 	
