@@ -82,6 +82,7 @@ void battle(Pokemon& attacker, Pokemon& defender, int skillIndex);
 void x_separator();
 void header();
 void DisplayPoke(const Pokemon& Poke1, const Pokemon& Poke2, int turn);
+void recentSkill(const Pokemon& Poke1, const Pokemon& Poke2);
 
 int main() {
 
@@ -390,9 +391,18 @@ void DisplayPoke(const Pokemon& Poke1, const Pokemon& Poke2, int turn)
 	x_separator();
 }
 
+void recentSkill( const Pokemon& Poke1, const Pokemon& Poke2 )
+{
+	//printing latest skills
+	cout << "| Latest Skill: " << Poke1.latestSkill << string(15 - Poke1.latestSkill.size(), " ");
+	cout << "| Latest Skill: " << Poke2.latestSkill << string(15 - Poke2.latestSkill.size(), " ") << "|" << endl;
 	
+	//printing damage effect
+	cout << "! " << Poke1.effectText << string(29 - Poke1.effectText, " ");
+	cout << "! " << Poke2.effectText << string(29 - Poke2.effectText, " ") << "|" << endl;
 	
-	
+	x_separator();
+}
 		
 	
 	
